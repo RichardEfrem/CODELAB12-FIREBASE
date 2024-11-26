@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "815392966057",
+    "project_id": "codelab12firebase",
+    "storage_bucket": "codelab12firebase.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:815392966057:android:82ef423a78a6063e6ef0b8",
+        "android_client_info": {
+          "package_name": "c14220270.paba.codelab12firebase"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDCs6NNq2r_8OBJ5q5HfxjbGEyoSauGA2Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
