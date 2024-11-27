@@ -63,25 +63,53 @@ class MainActivity : AppCompatActivity() {
         _btSimpan.setOnClickListener{
             TambahData(db, _etProvinsi.text.toString(), _etIbukota.text.toString())
         }
+
+        _lvData.setOnItemLongClickListener { parent, view, position, id ->
+            val namaPro = data[position].get("Pro")
+            if (namaPro != null) {
+                db.collection("tbProvinsi")
+                    .document(namaPro)
+                    .delete()
+                    .addOnSuccessListener {
+                        Log.d("Firebase", "Berhasil diHAPUS")
+                        readData(db)
+                    }
+                    .addOnFailureListener{ e ->
+                        Log.w("Firebase", e.message.toString())
+                    }
+            }
+            true
+        }
     }
 
-    fun TambahData(db: FirebaseFirestore, Provinsi: String, Ibukota: String){
+    private fun TambahData(db: FirebaseFirestore, Provinsi: String, Ibukota: String){
         val dataBaru = daftarProvinsi(Provinsi, Ibukota)
+//        db.collection("tbProvinsi")
+//            .add(dataBaru)
+//            .addOnSuccessListener {
+//                _etProvinsi.setText("")
+//                _etIbukota.setText("")
+//                Log.d("Firebase", "Data Berhasil Disimpan")
+//                readData(db)
+//            }
+//            .addOnFailureListener{
+//                Log.d("Firebase", it.message.toString())
+//            }
         db.collection("tbProvinsi")
-            .add(dataBaru)
+            .document(dataBaru.provinsi)
+            .set(dataBaru)
             .addOnSuccessListener {
                 _etProvinsi.setText("")
                 _etIbukota.setText("")
                 Log.d("Firebase", "Data Berhasil Disimpan")
+                readData(db)
             }
             .addOnFailureListener{
                 Log.d("Firebase", it.message.toString())
             }
-
-        readData(db)
     }
 
-    fun readData(db: FirebaseFirestore){
+    private fun readData(db: FirebaseFirestore){
         db.collection("tbProvinsi").get()
             .addOnSuccessListener {
                 result ->
